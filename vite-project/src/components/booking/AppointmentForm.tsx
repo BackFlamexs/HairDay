@@ -74,7 +74,7 @@ export const AppointmentForm: React.FC<AppointmentFormProps> = ({ onBooked }) =>
       />
 
       {date && availableTimes.length === 0 && (
-        <p className="text-sm text-gray-400">Não há horários disponíveis nesta data.</p>
+        <p className="text-sm text-fg-muted">Não há horários disponíveis nesta data.</p>
       )}
 
       <ClientNameField
@@ -91,7 +91,7 @@ export const AppointmentForm: React.FC<AppointmentFormProps> = ({ onBooked }) =>
 
       <button
         type="submit"
-        className="w-full rounded-lg bg-yellow-400 px-4 py-3 text-sm font-bold uppercase tracking-wide text-gray-900 transition hover:bg-yellow-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
+        className="w-full rounded-lg bg-yellow-400 px-4 py-3 text-sm font-bold uppercase tracking-wide text-gray-900 transition hover:bg-yellow-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300 focus-visible:ring-offset-2 focus-visible:ring-offset-panel"
       >
         Agendar
       </button>

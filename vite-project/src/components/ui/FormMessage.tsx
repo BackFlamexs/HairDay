@@ -8,8 +8,8 @@ export const FormMessage: React.FC<FormMessageProps> = ({ message, variant = "er
 
   const styles =
     variant === "error"
-      ? "border-red-500/40 bg-red-500/10 text-red-300"
-      : "border-emerald-500/40 bg-emerald-500/10 text-emerald-300";
+      ? "border-red-500/40 bg-red-500/10 text-red-700 dark:text-red-300"
+      : "border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300";
 
   return (
     <p

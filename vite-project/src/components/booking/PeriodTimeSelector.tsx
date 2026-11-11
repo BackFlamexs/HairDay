@@ -16,10 +16,10 @@ export const PeriodTimeSelector: React.FC<PeriodTimeSelectorProps> = ({
 }) => {
   return (
     <fieldset className="flex flex-col gap-3">
-      <legend className="mb-2 text-sm font-semibold text-gray-200">{label}</legend>
+      <legend className="mb-2 text-sm font-semibold text-fg">{label}</legend>
       {getPeriods().map((period) => (
         <div key={period.id} className="flex flex-col gap-2">
-          <span className="text-xs text-gray-400">{period.label}</span>
+          <span className="text-xs text-fg-muted">{period.label}</span>
           <div className="flex flex-wrap gap-2">
             {period.times.map((time) => (
               <TimeSlotButton

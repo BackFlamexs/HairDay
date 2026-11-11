@@ -10,6 +10,7 @@ Agendamento de cortes de cabelo com React, TypeScript e Tailwind CSS.
 - Agenda do dia agrupada por período, com navegação por data
 - Cancelamento de agendamento (com confirmação)
 - Dados salvos no `localStorage` e sincronizados entre abas
+- Tema claro e escuro (botão no canto superior esquerdo); segue o sistema por padrão e lembra a escolha
 
 ## Requisitos
 

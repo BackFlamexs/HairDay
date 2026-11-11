@@ -27,7 +27,7 @@ export const Schedule: React.FC<ScheduleProps> = ({ selectedDate, onDateChange }
   };
 
   return (
-    <section className="w-full flex-1 rounded-xl bg-gray-900 p-6 md:p-8">
+    <section className="w-full flex-1 rounded-xl bg-panel shadow-sm dark:shadow-none p-6 md:p-8">
       <ScheduleHeader selectedDate={selectedDate} onDateChange={onDateChange} />
 
       <div className="flex flex-col gap-3">

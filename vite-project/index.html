@@ -12,6 +12,17 @@
       rel="stylesheet"
     />
     <title>HairDay - Agendamento de Cortes</title>
+    <script>
+      // Aplica o tema antes do React carregar (evita "piscar" no tema errado)
+      (function () {
+        var theme = null;
+        try { theme = localStorage.getItem("hairday:theme"); } catch (e) {}
+        if (theme !== "light" && theme !== "dark") {
+          theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        if (theme === "dark") document.documentElement.classList.add("dark");
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

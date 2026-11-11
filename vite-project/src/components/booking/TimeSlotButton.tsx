@@ -15,10 +15,10 @@ export const TimeSlotButton: React.FC<TimeSlotButtonProps> = ({
     "rounded-lg border px-4 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400";
 
   const state = selected
-    ? "border-yellow-400 bg-gray-700 text-yellow-400"
+    ? "border-yellow-400 bg-slot-hover text-accent"
     : available
-      ? "border-gray-600 bg-gray-800 text-gray-200 hover:bg-gray-700"
-      : "cursor-not-allowed border-gray-700 bg-transparent text-gray-600 line-through";
+      ? "border-line bg-slot text-fg hover:bg-slot-hover"
+      : "cursor-not-allowed border-line-subtle bg-transparent text-fg-disabled line-through";
 
   return (
     <button

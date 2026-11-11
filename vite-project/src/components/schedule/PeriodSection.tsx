@@ -21,13 +21,13 @@ export const PeriodSection: React.FC<PeriodSectionProps> = ({ period, appointmen
   const headingId = `period-${period.id}`;
 
   return (
-    <section aria-labelledby={headingId} className="rounded-lg border border-gray-700">
-      <header className="flex items-center justify-between border-b border-gray-700 px-5 py-3">
-        <h3 id={headingId} className="flex items-center gap-2 text-sm font-semibold text-gray-200">
-          <Icon aria-hidden="true" className="h-5 w-5 text-yellow-400" />
+    <section aria-labelledby={headingId} className="rounded-lg border border-line-subtle">
+      <header className="flex items-center justify-between border-b border-line-subtle px-5 py-3">
+        <h3 id={headingId} className="flex items-center gap-2 text-sm font-semibold text-fg">
+          <Icon aria-hidden="true" className="h-5 w-5 text-accent" />
           {period.label}
         </h3>
-        <span className="text-sm text-gray-400">
+        <span className="text-sm text-fg-muted">
           {period.startLabel}-{period.endLabel}
         </span>
       </header>

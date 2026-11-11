@@ -8,7 +8,7 @@ type AppointmentListProps = {
 
 export const AppointmentList: React.FC<AppointmentListProps> = ({ appointments, onDelete }) => {
   return (
-    <ul className="divide-y divide-gray-800">
+    <ul className="divide-y divide-line-subtle">
       {appointments.map((appointment) => (
         <AppointmentItem key={appointment.id} appointment={appointment} onDelete={onDelete} />
       ))}

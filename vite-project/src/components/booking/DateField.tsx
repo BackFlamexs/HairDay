@@ -12,7 +12,7 @@ export const DateField: React.FC<DateFieldProps> = ({ label, value, onChange, mi
 
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="text-sm font-semibold text-gray-200">
+      <label htmlFor={id} className="text-sm font-semibold text-fg">
         {label}
       </label>
       <input
@@ -22,7 +22,7 @@ export const DateField: React.FC<DateFieldProps> = ({ label, value, onChange, mi
         min={min}
         required
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-gray-600 bg-gray-900 px-3 py-3 text-gray-100 outline-none transition focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400"
+        className="w-full rounded-lg border border-line bg-field px-3 py-3 text-fg outline-none transition focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400"
       />
     </div>
   );
