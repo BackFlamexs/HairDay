@@ -1,6 +1,9 @@
-import React from "react";
-import HairDaySvg from "../../assets/hairday-logo.svg";
+import logoUrl from "../../assets/hairday-logo.svg";
 
-export const HairDayLogo: React.FC = () => {
-  return <HairDaySvg />;
+type HairDayLogoProps = {
+  className?: string;
+};
+
+export const HairDayLogo: React.FC<HairDayLogoProps> = ({ className = "h-10 w-10" }) => {
+  return <img src={logoUrl} alt="" aria-hidden="true" className={className} />;
 };
