@@ -1,19 +1,44 @@
-import { useCallback, useMemo, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Appointment } from "../types/appointment";
 import { createAppointment, hasTimeConflict, isValidClientName } from "../utils/appointment";
 import { isPastDateTime } from "../utils/date";
+import {
+  STORAGE_KEY,
+  loadAppointments,
+  parseAppointments,
+  saveAppointments,
+} from "../utils/storage";
 import { AppointmentsContext, type AddAppointmentResult } from "./appointmentsContext";
 
 type AppointmentsProviderProps = {
   children: ReactNode;
+  /** Quando informado, ignora o localStorage e não persiste (útil para testes) */
   initialAppointments?: Appointment[];
 };
 
 export const AppointmentsProvider: React.FC<AppointmentsProviderProps> = ({
   children,
-  initialAppointments = [],
+  initialAppointments,
 }) => {
-  const [appointments, setAppointments] = useState<Appointment[]>(initialAppointments);
+  const persist = initialAppointments === undefined;
+  const [appointments, setAppointments] = useState<Appointment[]>(
+    () => initialAppointments ?? loadAppointments()
+  );
+
+  // Salva a cada alteração
+  useEffect(() => {
+    if (persist) saveAppointments(appointments);
+  }, [appointments, persist]);
+
+  // Mantém várias abas sincronizadas
+  useEffect(() => {
+    if (!persist) return;
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === STORAGE_KEY) setAppointments(parseAppointments(event.newValue));
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, [persist]);
 
   const addAppointment = useCallback(
     (clientName: string, date: string, time: string): AddAppointmentResult => {
