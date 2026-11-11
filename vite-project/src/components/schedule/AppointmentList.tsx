@@ -1,32 +1,17 @@
+import type { Appointment } from "../../types/appointment";
 import { AppointmentItem } from "./AppointmentItem";
 
 type AppointmentListProps = {
-  appointments: {
-    id: string;
-    clientName: string;
-    date: string;
-    time: string;
-  }[];
-  deleteAppointment: (id: string) => void;
+  appointments: Appointment[];
+  onDelete: (appointment: Appointment) => void;
 };
 
-export const AppointmentList: React.FC<AppointmentListProps> = ({
-  appointments,
-  deleteAppointment,
-}) => {
-  if (appointments.length === 0) {
-    return <></>;
-  }
-
+export const AppointmentList: React.FC<AppointmentListProps> = ({ appointments, onDelete }) => {
   return (
-    <div>
+    <ul className="divide-y divide-gray-800">
       {appointments.map((appointment) => (
-        <AppointmentItem
-          key={appointment.id}
-          appointment={appointment}
-          deleteAppointment={deleteAppointment}
-        />
+        <AppointmentItem key={appointment.id} appointment={appointment} onDelete={onDelete} />
       ))}
-    </div>
+    </ul>
   );
 };

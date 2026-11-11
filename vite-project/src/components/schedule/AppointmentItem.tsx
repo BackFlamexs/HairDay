@@ -1,40 +1,25 @@
+import { RiDeleteBinLine } from "react-icons/ri";
+import type { Appointment } from "../../types/appointment";
+
 type AppointmentItemProps = {
-  appointment: {
-    id: string;
-    clientName: string;
-    date: string;
-    time: string;
-  };
-  deleteAppointment: (id: string) => void;
+  appointment: Appointment;
+  onDelete: (appointment: Appointment) => void;
 };
 
-export const AppointmentItem: React.FC<AppointmentItemProps> = ({
-  appointment,
-  deleteAppointment,
-}) => {
+export const AppointmentItem: React.FC<AppointmentItemProps> = ({ appointment, onDelete }) => {
   return (
-    <div className="flex items-center justify-between py-2 border-b border-gray-600 last:border-0">
-      <span className="text-gray-300">
-        <span className="font-medium text-white">{appointment.time}</span>
-        - {appointment.clientName}
-      </span>
+    <li className="flex items-center gap-4 py-2">
+      <span className="font-bold tabular-nums text-gray-100">{appointment.time}</span>
+      <span className="flex-1 truncate text-gray-300">{appointment.clientName}</span>
       <button
-        onClick={() => deleteAppointment(appointment.id)}
-        className="text-red-400 hover:text-red-300 transition-colors"
-        aria-label="Excluir agendamento"
+        type="button"
+        onClick={() => onDelete(appointment)}
+        className="rounded p-1 text-gray-500 transition hover:text-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400"
+        aria-label={`Cancelar agendamento de ${appointment.clientName} às ${appointment.time}`}
+        title="Cancelar agendamento"
       >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="w-4 h-4"
-        >
-          <path
-            d="M6 19a2 2 0 0 1-2-2H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-5l-5 2Zm0-12h12v2h-5l-5 2V7ZM7 10l5 5V7H7v3Z"
-          />
-        </svg>
+        <RiDeleteBinLine aria-hidden="true" className="h-5 w-5" />
       </button>
-    </div>
+    </li>
   );
 };

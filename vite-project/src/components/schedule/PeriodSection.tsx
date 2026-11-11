@@ -1,42 +1,44 @@
+import { RiMoonClearLine, RiSunCloudyLine, RiSunLine } from "react-icons/ri";
+import type { IconType } from "react-icons";
+import type { Appointment, Period, PeriodId } from "../../types/appointment";
 import { EmptyPeriod } from "./EmptyPeriod";
 import { AppointmentList } from "./AppointmentList";
 
-type PeriodSectionProps = {
-  periodId: "morning" | "afternoon" | "evening";
-  appointments: {
-    id: string;
-    clientName: string;
-    date: string;
-    time: string;
-  }[];
-  deleteAppointment: (id: string) => void;
+const PERIOD_ICONS: Record<PeriodId, IconType> = {
+  morning: RiSunLine,
+  afternoon: RiSunCloudyLine,
+  evening: RiMoonClearLine,
 };
 
-export const PeriodSection: React.FC<PeriodSectionProps> = ({
-  periodId,
-  appointments,
-  deleteAppointment,
-}) => {
-  const periodInfo =
-    periodId === "morning"
-      ? { label: "Manhã", start: "09h", end: "12h" }
-      : periodId === "afternoon"
-        ? { label: "Tarde", start: "13h", end: "18h" }
-        : { label: "Noite", start: "19h", end: "21h" };
+type PeriodSectionProps = {
+  period: Period;
+  appointments: Appointment[];
+  onDelete: (appointment: Appointment) => void;
+};
+
+export const PeriodSection: React.FC<PeriodSectionProps> = ({ period, appointments, onDelete }) => {
+  const Icon = PERIOD_ICONS[period.id];
+  const headingId = `period-${period.id}`;
 
   return (
-    <section
-      key={periodId}
-      className="rounded-lg p-4 bg-gray-800"
-    >
-      <header className="flex justify-between items-start border-b border-gray-600 pb-2 mb-2">
-        <span className="text-sm font-medium text-gray-300">{periodInfo.label}</span>
+    <section aria-labelledby={headingId} className="rounded-lg border border-gray-700">
+      <header className="flex items-center justify-between border-b border-gray-700 px-5 py-3">
+        <h3 id={headingId} className="flex items-center gap-2 text-sm font-semibold text-gray-200">
+          <Icon aria-hidden="true" className="h-5 w-5 text-yellow-400" />
+          {period.label}
+        </h3>
+        <span className="text-sm text-gray-400">
+          {period.startLabel}-{period.endLabel}
+        </span>
       </header>
-      <AppointmentList
-        appointments={appointments}
-        deleteAppointment={deleteAppointment}
-      />
-      <EmptyPeriod />
+
+      <div className="px-5 py-3">
+        {appointments.length === 0 ? (
+          <EmptyPeriod />
+        ) : (
+          <AppointmentList appointments={appointments} onDelete={onDelete} />
+        )}
+      </div>
     </section>
   );
 };
