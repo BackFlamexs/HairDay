@@ -11,26 +11,23 @@ export const TimeSlotButton: React.FC<TimeSlotButtonProps> = ({
   selected,
   onClick,
 }) => {
-  const classes = [
-    "px-3 py-1 rounded-md text-sm font-medium transition-colors",
-    "hover:opacity-80",
-  ];
+  const base =
+    "rounded-lg border px-4 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400";
 
-  if (selected) {
-    classes.push("bg-yellow-400 text-gray-900");
-  } else if (available) {
-    classes.push("bg-gray-700 text-white");
-  } else {
-    classes.push("bg-gray-500 text-gray-300 cursor-not-allowed");
-  }
+  const state = selected
+    ? "border-yellow-400 bg-gray-700 text-yellow-400"
+    : available
+      ? "border-gray-600 bg-gray-800 text-gray-200 hover:bg-gray-700"
+      : "cursor-not-allowed border-gray-700 bg-transparent text-gray-600 line-through";
 
   return (
     <button
-      className={classes.join(" ")}
+      type="button"
+      className={`${base} ${state}`}
       onClick={onClick}
       disabled={!available}
-      aria-disabled={!available}
-      title={!available ? "Horário indisponível" : ""}
+      aria-pressed={selected}
+      title={available ? undefined : "Horário indisponível"}
     >
       {time}
     </button>
