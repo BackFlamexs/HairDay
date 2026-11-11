@@ -1,8 +1,10 @@
 export interface Appointment {
   id: string;
   clientName: string;
-  date: string; // Formato ISO: YYYY-MM-DD
-  time: string; // Formato HH:mm, 24 horas
+  /** Formato ISO local: YYYY-MM-DD */
+  date: string;
+  /** Formato HH:mm, 24 horas */
+  time: string;
 }
 
 export type PeriodId = "morning" | "afternoon" | "evening";
@@ -10,7 +12,12 @@ export type PeriodId = "morning" | "afternoon" | "evening";
 export interface Period {
   id: PeriodId;
   label: "Manhã" | "Tarde" | "Noite";
-  startTime: string;
-  endTime: string;
+  /** Rótulo de início, ex.: "09h" */
+  startLabel: string;
+  /** Rótulo de fim, ex.: "12h" */
+  endLabel: string;
+  /** Horários disponíveis para agendamento no período */
   times: string[];
 }
+
+export type AppointmentsByPeriod = Record<PeriodId, Appointment[]>;
